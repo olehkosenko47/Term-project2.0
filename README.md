@@ -52,7 +52,8 @@
 
 ```mermaid
 graph TD
-    A[Client<br>(HTML + JS)] -->|WebSocket| B(FastAPI Server)
+    A[Client (HTML + JS)] -->|WebSocket| B(FastAPI Server)
     B -->|SQLite| C[(Database)]
     B --> D[REST API]
     D --> C
+```
