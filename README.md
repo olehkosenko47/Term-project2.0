@@ -51,7 +51,7 @@
 ## 📊 Mermaid-діаграма (Архітектура)
 
 ## 📊 Архітектура проєкту
-
+```
 flowchart TD
     A[Client HTML + JS] --> B[FastAPI Server]
     B --> C[Database SQLite]
