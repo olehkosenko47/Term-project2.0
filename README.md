@@ -53,7 +53,7 @@
 ## 📊 Архітектура проєкту
 
 ```mermaid
-graph TD
+flowchart TD
     A[Client (HTML + JS)] --> B[FastAPI Server]
     B --> C[Database (SQLite)]
     B --> D[REST API]
