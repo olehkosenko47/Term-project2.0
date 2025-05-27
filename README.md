@@ -22,9 +22,7 @@
 | `database.py`    | Функції для роботи з SQLite базою |
 | `index.html`     | Веб-інтерфейс чату |
 | `script.js`      | Підключення до WebSocket, логіка відображення |
-| `styles.tcss`    | Стилі інтерфейсу (буде перейменовано в `styles.css`) |
-| `.gitattributes` | Git-системний файл |
-| `analytics.ipynb`| 📊 (планується) Аналіз активності з бази даних |
+| `styles.tcss`    | Стилі інтерфейсу |
 
 ---
 
@@ -53,9 +51,40 @@
 ## 📊 Архітектура проєкту
 
 ```mermaid
-graph TD
-    A[Client HTML + JS] --> B[FastAPI Server]
-    B --> C[Database SQLite]
-    B --> D[REST API]
-    D --> C
+flowchart TD
+    A[Term-project2.0 Проєкт] 
+
+    subgraph Client["Клієнт"]
+        IH[index.html]
+        SJ[script.js]
+        ST[styles.tcss]
+    end
+
+    subgraph Server["Сервер (FastAPI)"]
+        MPY[main.py]
+        DBPY[database.py]
+    end
+
+    subgraph Database["SQLite база даних"]
+        DB_users[users таблиця]
+        DB_messages[messages таблиця]
+    end
+
+    %% Зв’язки
+    A --> Client
+    A --> Server
+    A --> Database
+
+    IH --> SJ
+    IH --> ST
+
+    MPY --> DBPY
+    MPY --> DB_users
+    MPY --> DB_messages
+
+    DBPY --> DB_users
+    DBPY --> DB_messages
+
+    SJ -- WebSocket --> MPY
+    IH -- HTTP REST --> MPY
 ```
