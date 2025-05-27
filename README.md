@@ -50,10 +50,12 @@
 
 ## 📊 Mermaid-діаграма (Архітектура)
 
+## 📊 Архітектура проєкту
+
 ```mermaid
 graph TD
-    A[Client (HTML + JS)] -->|WebSocket| B(FastAPI Server)
-    B -->|SQLite| C[(Database)]
+    A[Client (HTML + JS)] --> B[FastAPI Server]
+    B --> C[Database (SQLite)]
     B --> D[REST API]
     D --> C
 ```
