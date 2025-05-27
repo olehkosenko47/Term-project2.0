@@ -1,0 +1,265 @@
+/* Імпортуємо Google Fonts для шрифту Poppins, якщо його не було */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif; /* Використовуємо Poppins */
+    background: linear-gradient(135deg, #a7b7ec 0%, #e6f0ff 100%); /* Красивіший градієнт */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Для центрування вмісту */
+    justify-content: center; /* Для центрування вмісту */
+    align-items: center; /* Для центрування вмісту */
+    min-height: 100vh; /* Щоб займав весь екран */
+    color: #333; /* Базовий колір тексту */
+}
+.container {
+    max-width: 960px; /* Збільшив ширину */
+    width: 90%; /* Адаптивність */
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 20px; /* Більші заокруглення */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15); /* Виразніша тінь */
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    min-height: 600px; /* Збільшив мінімальну висоту */
+}
+.contacts {
+    width: 300px; /* Збільшив ширину контактів */
+    min-width: 250px;
+    background: #eef3f7; /* Світліший фон */
+    border-right: 1px solid #e0e6ec; /* М'якша межа */
+    padding: 30px; /* Збільшив padding */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* Щоб padding враховувався в ширині */
+}
+.contacts h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 25px; /* Збільшив відступ */
+    font-size: 2em; /* Більший заголовок */
+    font-weight: 600; /* Зробив жирнішим */
+}
+.contacts p {
+    font-size: 1.15em; /* Збільшив розмір */
+    color: #555;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+.contacts strong {
+    color: #007bff;
+}
+
+.chat {
+    flex: 1;
+    padding: 30px; /* Збільшив padding */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.messages {
+    flex: 1;
+    border: 1px solid #e0e6ec;
+    border-radius: 18px; /* Більші заокруглення */
+    padding: 20px; /* Збільшив padding */
+    overflow-y: auto;
+    margin-bottom: 20px;
+    background: #fdfdfd;
+    display: flex; /* Щоб повідомлення йшли зверху донизу */
+    flex-direction: column;
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.05); /* Внутрішня тінь */
+}
+.message {
+    margin: 10px 0; /* Трохи збільшив відступи */
+    padding: 14px 20px; /* Збільшив padding */
+    border-radius: 25px; /* Більші заокруглення */
+    max-width: 75%; /* Збільшив максимальну ширину */
+    line-height: 1.5em;
+    word-wrap: break-word; /* Перенесення довгих слів */
+    font-size: 1.05em;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* М'якша тінь для повідомлень */
+}
+.message.me {
+    background-color: #007bff; /* Акцентний колір для своїх */
+    color: white;
+    align-self: flex-end; /* Вирівнювання праворуч */
+    border-bottom-right-radius: 5px; /* Невеликий куточок знизу справа */
+}
+.message.other {
+    background-color: #e2f7ea; /* Світлий зелений для інших */
+    align-self: flex-start; /* Вирівнювання ліворуч */
+    color: #2c3e50;
+    border-bottom-left-radius: 5px; /* Невеликий куточок знизу зліва */
+}
+/* Окремий стиль для бота, щоб відрізняти від "other" користувачів */
+.message.bot-reply {
+    background-color: #f0f8ff; /* Світлий блакитний для бота */
+    color: #2c3e50;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+
+input[type="text"], select {
+    padding: 14px; /* Збільшив padding */
+    border: 1px solid #cad2d9; /* М'якший колір рамки */
+    border-radius: 12px; /* Заокруглення */
+    font-size: 16px;
+    flex: 1; /* Щоб input займав доступне місце */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+input[type="text"]::placeholder {
+    color: #8899a8; /* Колір плейсхолдера */
+}
+input[type="text"]:focus, select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 4px rgba(0,123,255,0.25); /* Тінь при фокусі */
+    outline: none;
+}
+button {
+    padding: 14px 25px; /* Збільшив padding */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 12px; /* Заокруглення */
+    font-size: 17px; /* Збільшив розмір шрифту */
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Додав box-shadow до переходу */
+    flex-shrink: 0; /* Щоб кнопка не зменшувалася */
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2); /* Тінь для кнопки */
+}
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px); /* Невеликий ефект при наведенні */
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3); /* Більша тінь при наведенні */
+}
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 123, 255, 0.1); /* Менша тінь при кліку */
+}
+form {
+    display: flex;
+    gap: 15px; /* Збільшив відступ між елементами форми */
+    margin-top: 15px;
+}
+
+/* Стилі для форми входу */
+.login-form, .welcome-message {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Збільшив відступ */
+    padding: 40px; /* Збільшив padding */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%; /* Щоб займало всю висоту */
+    flex: 1; /* Щоб займав більше місця */
+}
+
+.login-form h3, .welcome-message h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 2.5em; /* Більший розмір */
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.08); /* Легка тінь тексту */
+}
+.welcome-message p {
+    font-size: 1.3em;
+    color: #666;
+    line-height: 1.6em;
+}
+
+.login-form input[type="text"] {
+    width: 90%;
+    max-width: 400px;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); /* Внутрішня тінь для полів вводу */
+}
+.login-form button {
+    width: 80%;
+    max-width: 250px;
+    padding: 15px;
+    font-size: 1.2em;
+    border-radius: 15px;
+}
+
+/* Стилі для select контакту */
+#contactSelect {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    padding: 12px 15px;
+    border: 1px solid #cad2d9;
+    border-radius: 12px;
+    font-size: 17px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    appearance: none; /* Приховуємо стандартну стрілку */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23007bff' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* Кастомна стрілка */
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 24px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.03); /* Легка внутрішня тінь */
+}
+#contactSelect:hover {
+    border-color: #007bff;
+}
+
+/* Адаптивність для менших екранів */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        flex-direction: column;
+        margin: 0; /* Знімаємо margin */
+        width: 100%; /* Повна ширина */
+        height: 100vh; /* Повна висота */
+        border-radius: 0; /* Знімаємо заокруглення для повноекранного режиму */
+        box-shadow: none; /* Знімаємо тінь */
+        min-height: unset;
+    }
+    .contacts {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e0e6ec;
+        min-height: 100px;
+        max-height: 180px; /* Збільшив макс. висоту для контактів */
+        overflow-y: auto; /* Прокрутка, якщо багато контактів */
+        padding: 20px;
+    }
+    .chat {
+        width: 100%;
+        flex: 1;
+        padding: 20px;
+    }
+    .messages {
+        flex: 1;
+        min-height: 250px;
+        padding: 15px;
+    }
+    form {
+        flex-direction: column; /* Форма повідомлень у стовпчик на мобільних */
+        gap: 10px;
+    }
+    input[type="text"] {
+        width: 100%;
+    }
+    button {
+        width: 100%;
+    }
+    .login-form, .welcome-message {
+        padding: 20px;
+        gap: 15px;
+    }
+    .login-form h3, .welcome-message h2 {
+        font-size: 2em;
+    }
+    .welcome-message p {
+        font-size: 1.1em;
+    }
+}

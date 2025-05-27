@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Чат з ботами</title>
+    <link rel="stylesheet" href="/static/styles.tcss">
+</head>
+<body>
+    <div class="container">
+        <div class="contacts">
+            <h3>Контакти</h3>
+            {% if username %}
+            <p>Ви: <strong>{{username}}</strong></p>
+            <select id="contactSelect"></select>
+            {% else %}
+            <form action="/login" method="post" class="login-form">
+                <h3>Увійти в чат</h3>
+                <input type="text" name="username" placeholder="Введіть ваше ім'я" required autocomplete="off">
+                <button type="submit">Увійти</button>
+            </form>
+            {% endif %}
+        </div>
+        <div class="chat">
+            {% if username %}
+            <div id="messages" class="messages"></div>
+            <form id="form">
+                <input type="text" id="messageText" placeholder="Введіть повідомлення" autocomplete="off">
+                <button type="submit">Надіслати</button>
+            </form>
+            {% else %}
+            <div class="welcome-message">
+                <h2>Ласкаво просимо до чату!</h2>
+                <p>Будь ласка, увійдіть, щоб почати спілкування.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if username %}
+    <script>
+        const username = "{{username}}";
+        const ws = new WebSocket(`ws://${location.host}/ws/${username}`);
+        const form = document.getElementById('form');
+        const input = document.getElementById('messageText');
+        const messages = document.getElementById('messages');
+        const contactSelect = document.getElementById('contactSelect');
+        const contacts = {{ contacts | tojson }}; // Контакти передаються сюди з Jinja2
+
+        // Заповнюємо select з контактами
+        contacts.forEach(contact => {
+            const option = document.createElement('option');
+            option.value = contact;
+            option.text = contact;
+            contactSelect.appendChild(option);
+        });
+
+        ws.onmessage = (event) => {
+            const fullMessage = event.data;
+            let sender = "Невідомий";
+            let messageContent = fullMessage;
+
+            // Спроба розбити повідомлення на відправника та контент
+            const colonIndex = fullMessage.indexOf(":");
+            if (colonIndex !== -1) {
+                sender = fullMessage.substring(0, colonIndex).trim();
+                messageContent = fullMessage.substring(colonIndex + 1).trim();
+            }
+
+            const msgDiv = document.createElement('div');
+            // Визначаємо, чи це наше повідомлення (відправлене від нас, але отримане від сервера, якщо ми самі собі пишемо),
+            // чи повідомлення від іншого.
+            // Для цілей бота і P2P, якщо sender не поточний юзер, це "other".
+            msgDiv.className = 'message other'; // Повідомлення від інших або ботів
+            msgDiv.textContent = `${sender}: ${messageContent}`;
+            messages.appendChild(msgDiv);
+            messages.scrollTop = messages.scrollHeight;
+        };
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const contact = contactSelect.value; // Обраний контакт з випадаючого списку
+            const message = input.value.trim(); // Повідомлення для відправки
+            if (!contact || !message) return; // Не відправляємо порожні повідомлення або без обраного контакту
+
+            // Формат відправки: "contact:message"
+            ws.send(`${contact}:${message}`);
+
+            // Відображаємо своє повідомлення одразу
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message me'; // Мої повідомлення
+            msgDiv.textContent = `${username}: ${message}`;
+            messages.appendChild(msgDiv);
+            input.value = ''; // Очищаємо поле вводу
+            messages.scrollTop = messages.scrollHeight; // Прокручуємо донизу
+        });
+    </script>
+    {% endif %}
+</body>
+</html>
