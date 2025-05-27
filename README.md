@@ -52,10 +52,9 @@
 
 ## 📊 Архітектура проєкту
 
-```mermaid
 flowchart TD
-    A[Client (HTML + JS)] --> B[FastAPI Server]
-    B --> C[Database (SQLite)]
+    A[Client HTML + JS] --> B[FastAPI Server]
+    B --> C[Database SQLite]
     B --> D[REST API]
     D --> C
 ```
