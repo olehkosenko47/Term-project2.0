@@ -52,7 +52,7 @@
 
 ```mermaid
 flowchart TD
-    A[Term-project2.0 Проєкт]
+    A[Term-project2.0]
 
     subgraph Client["Клієнт"]
         IH[index.html]
