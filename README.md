@@ -24,7 +24,7 @@
 | `database.py`    | Функції для роботи з SQLite базою     |
 | `index.html`     | Веб-інтерфейс чату                    |
 | `script.js`      | Логіка WebSocket та відображення чату |
-| `styles.tcss`    | Стилі інтерфейсу                      |
+| `styles.css`    | Стилі інтерфейсу                      |
 
 ---
 
@@ -57,7 +57,7 @@ flowchart TD
     subgraph Client["Клієнт"]
         IH[index.html]
         SJ[script.js]
-        ST[styles.tcss]
+        ST[styles.css]
     end
 
     subgraph Server["Сервер (FastAPI)"]
